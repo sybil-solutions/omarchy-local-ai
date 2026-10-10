@@ -66,16 +66,16 @@
   "releases_url": "https://api.github.com/repos/sybil-solutions/omarchy-local-ai/releases{/id}",
   "deployments_url": "https://api.github.com/repos/sybil-solutions/omarchy-local-ai/deployments",
   "created_at": "2026-09-01T08:40:03Z",
-  "updated_at": "2026-10-10T05:03:27Z",
-  "pushed_at": "2026-10-09T11:32:37Z",
+  "updated_at": "2026-10-10T23:15:31Z",
+  "pushed_at": "2026-10-10T23:15:31Z",
   "git_url": "git://github.com/sybil-solutions/omarchy-local-ai.git",
   "ssh_url": "git@github.com:sybil-solutions/omarchy-local-ai.git",
   "clone_url": "https://github.com/sybil-solutions/omarchy-local-ai.git",
   "svn_url": "https://github.com/sybil-solutions/omarchy-local-ai",
   "homepage": "https://sybil-solutions.github.io/omarchy-local-ai/",
-  "size": 38778,
-  "stargazers_count": 121,
-  "watchers_count": 121,
+  "size": 38821,
+  "stargazers_count": 124,
+  "watchers_count": 124,
   "language": "Shell",
   "has_issues": true,
   "has_projects": true,
@@ -83,11 +83,11 @@
   "has_wiki": true,
   "has_pages": true,
   "has_discussions": false,
-  "forks_count": 22,
+  "forks_count": 24,
   "mirror_url": null,
   "archived": false,
   "disabled": false,
-  "open_issues_count": 6,
+  "open_issues_count": 7,
   "license": {
     "key": "mit",
     "name": "MIT License",
@@ -111,9 +111,9 @@
     "tailscale"
   ],
   "visibility": "public",
-  "forks": 22,
-  "open_issues": 6,
-  "watchers": 121,
+  "forks": 24,
+  "open_issues": 7,
+  "watchers": 124,
   "default_branch": "main",
   "permissions": {
     "admin": true,
@@ -173,7 +173,7 @@
       "status": "disabled"
     }
   },
-  "network_count": 22,
+  "network_count": 24,
   "subscribers_count": 1,
   "day": "2026-10-10"
 }
