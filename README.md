@@ -31,7 +31,7 @@ Setup ends by checking what the panel will show. Sharing a model on your tailnet
 - Docker, `jq`, `curl`, `flock` and `sha256sum`.
 - A supported GPU (below), or an x86-64 CPU with AVX2 and enough RAM for its recipe. NVIDIA needs the driver and `nvidia-smi`; setup adds the container toolkit. Docker 25 or later (Omarchy ships 29). AMD needs ROCm's `amd-smi`.
 - Optional: Tailscale, to share a model; a Hugging Face token in `~/.cache/huggingface/token`, used for downloads when it exists.
-- Network access to `huggingface.co` (weights), `ghcr.io/sybil-solutions`, historical `ghcr.io/0xsero` pins, and `ghcr.io/ggml-org` (the engine and gateway images, pinned by digest), and `api.github.com` and `raw.githubusercontent.com` (the automatic catalog check), and `huggingface.co` again for model cards in full screen.
+- Network access to `huggingface.co` (weights), `ghcr.io/sybil-solutions`, historical `ghcr.io/0xsero` pins, and `ghcr.io/ggml-org` (the engine and gateway images, pinned by digest), and `api.github.com` and `raw.githubusercontent.com` (the automatic catalog check), `huggingface.co` again for model cards in full screen, and `usage.sybilsolutions.ai` (the install count, below).
 
 ## What it does
 
@@ -56,6 +56,7 @@ bin/omarchy-local-ai stop <recipe>
 bin/omarchy-local-ai open <recipe>            # the chosen agent on it, in a terminal
 bin/omarchy-local-ai update <agent>           # update the installed harness
 bin/omarchy-local-ai set agent|folder <value> [recipe]
+bin/omarchy-local-ai set ping on|off           # whether this install is counted
 bin/omarchy-local-ai share <recipe> [off]
 bin/omarchy-local-ai log
 ```
@@ -92,6 +93,26 @@ access. Digest pins and build attestations establish image identity; they do
 not make untrusted code safe. Engine restrictions need per-engine hardware
 validation before rollout. Disabling gateway DNS does not block outbound IP
 connections.
+
+### What Local AI sends
+
+To count how many machines use it, Local AI sends one small message each time it
+checks the registry for new models (every 12 hours while the bar runs) to
+`https://usage.sybilsolutions.ai/v1/local-ai/ping`:
+
+```json
+{"id": "9f2c…", "version": "6.13.0", "hw": ["rtx-3090"], "running": 1}
+```
+
+`id` is a random number made on first run and kept in
+`~/.local/state/omarchy/local-ai/install-id`; it is not derived from the machine
+or you, and Remove deletes it. `hw` lists the card kinds Local AI has recipes for
+that it found, `running` how many models run. The server keeps those four fields
+and the day, and no IP address or other header. Its code and the public totals:
+[local-ai-usage](https://github.com/sybil-solutions/local-ai-usage).
+
+Turn it off with `omarchy-local-ai set ping off` (or `DO_NOT_TRACK=1` in the
+bar's environment). A failed or refused message changes nothing.
 
 ### New models, downloads and removal
 
